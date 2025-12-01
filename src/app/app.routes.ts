@@ -21,6 +21,12 @@ export const routes: Routes = [
       import('./pages/brand-form/brand-form').then(m => m.BrandForm)
   },
 
+    {
+    path: 'brands/:brandId/delete',
+    loadComponent: () =>
+      import('./pages/brand-list/brand-list').then(m => m.BrandList)
+  },
+
   {
     path: 'brands/:brandId',
     loadComponent: () =>
@@ -38,6 +44,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/model-form/model-form').then(m => m.ModelForm)
   },
+
+    {
+    path: 'brands/:brandId/models/:modelId/delete',
+    loadComponent: () =>
+      import('./pages/model-form/model-form').then(m => m.ModelForm)
+  },
+
 
   {
     path: 'brands/:brandId/models/:modelId',

@@ -1,33 +1,45 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterLink } from '@angular/router';
 import { ModelService } from '../../services/model';
 import { Model } from '../../models/model';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-model-details',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, RouterLink],
   templateUrl: './model-details.html',
 })
 export class ModelDetails {
 
   brandId!: string;
   modelId!: string;
-  model?: Model;
+
+  model$!: Observable<Model>;
 
   constructor(
     private route: ActivatedRoute,
-    private modelService: ModelService
+    private modelService: ModelService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.brandId = this.route.snapshot.paramMap.get('brandId')!;
-    this.modelId = this.route.snapshot.paramMap.get('modelId')!;
-    this.load();
+    this.model$ = this.route.paramMap.pipe(
+      map(params => {
+        this.brandId = params.get('brandId')!;
+        this.modelId = params.get('modelId')!;
+        return { brandId: this.brandId, modelId: this.modelId };
+      }),
+      switchMap(({ brandId, modelId }) =>
+        this.modelService.getById(brandId, modelId)
+      )
+    );
   }
 
-  load() {
-    this.modelService.getById(this.brandId, this.modelId).subscribe(m => this.model = m);
+
+  backToBrand() {
+    this.router.navigate(['/brands', this.brandId]);
   }
 }

@@ -1,7 +1,14 @@
 <h1>Szczegóły modelu</h1>
 
-<div *ngIf="model">
+<div *ngIf="model$ | async as model">
   <p><strong>Marka:</strong> {{ model.brandName }}</p>
   <p><strong>Model:</strong> {{ model.name }}</p>
   <p><strong>Rok:</strong> {{ model.year }}</p>
+ 
+  <button
+    type="button"
+    (click)="backToBrand()"
+  >
+    Powrót do marki
+  </button>
 </div>

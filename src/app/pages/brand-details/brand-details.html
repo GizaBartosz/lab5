@@ -28,7 +28,7 @@
     </button>
     <button
       type="button"
-      (click)="remove(m.id)"
+      (click)="remove(m)"
       style="margin-left: 4px;"
     >
       Usuń
@@ -37,8 +37,10 @@
   </li>
 </ul>
 <button
-type = "button"
-routerLink="/brands/new"
-style="margin-top: 12px;"
->Dodaj markę</button>
+  type="button"
+  [routerLink]="['/brands', brandId, 'models', 'new']"
+  style="margin-top: 12px;"
+>
+  Dodaj model
+</button>
 <br/><br/>

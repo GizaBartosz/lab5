@@ -45,6 +45,12 @@ export class BrandList {
   }
 
   remove(b: Brand) {
-    this.brandService.delete(b.id).subscribe(() => this.load());
+    if (!confirm(`Usuń markę "${b.name}"?`)) {
+      return;
+    }
+    this.brandService.delete(b.id).subscribe({
+      next: () => this.load(),
+      error: err => console.error('Błąd przy usuwaniu marki', err),
+    });
   }
 }

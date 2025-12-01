@@ -58,8 +58,11 @@ export class BrandDetails {
     );
   }
 
-  remove(modelId: string) {
-    this.modelService.delete(this.brandId, modelId).subscribe({
+  remove(m: Model) {
+    if (!confirm(`Usuń model "${m.name}"?`)) {
+      return;
+    }
+    this.modelService.delete(this.brandId, m.id).subscribe({
       next: () => {
         this.models$ = this.buildModelsStream(this.brandId);
       },
