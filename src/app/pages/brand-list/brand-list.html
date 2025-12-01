@@ -1,0 +1,35 @@
+<h1>Marki</h1>
+
+<button routerLink="/brands/new">Dodaj markę</button>
+
+
+<ul>
+  <li *ngFor="let b of (brands$ | async)">
+    {{ b.name }}
+
+    <button
+      type="button"
+      [routerLink]="['/brands', b.id]"
+      style="margin-left: 8px;"
+    >
+      Szczegóły
+    </button>
+
+    <button
+      type="button"
+      [routerLink]="['/brands', b.id, 'edit']"
+      style="margin-left: 4px;"
+    >
+      Edytuj
+    </button>
+
+    <button
+      type="button"
+      [routerLink]="['/brands', b.id, 'delete']"
+      style="margin-left: 4px;"
+    >
+      Usuń
+    </button>
+
+  </li>
+</ul>

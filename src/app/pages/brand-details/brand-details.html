@@ -1,0 +1,44 @@
+<h1>Szczegóły marki:</h1>
+
+<div *ngIf="brand$ | async as brand">
+   <h2> {{ brand.name }} </h2>
+</div>
+
+<p> Modele: </p>
+
+
+
+<ul>
+  <li *ngFor="let m of (models$ | async)">
+    {{ m.name }}
+    <button
+      type="button"
+      [routerLink]="['/brands', brandId, 'models', m.id]"
+      style="margin-left: 8px;"
+    >
+      Szczegóły
+    </button>
+
+    <button
+      type="button"
+      [routerLink]="['/brands', brandId, 'models', m.id, 'edit']"
+      style="margin-left: 4px;"
+    >
+      Edytuj
+    </button>
+    <button
+      type="button"
+      (click)="remove(m.id)"
+      style="margin-left: 4px;"
+    >
+      Usuń
+    </button>
+    
+  </li>
+</ul>
+<button
+type = "button"
+routerLink="/brands/new"
+style="margin-top: 12px;"
+>Dodaj markę</button>
+<br/><br/>

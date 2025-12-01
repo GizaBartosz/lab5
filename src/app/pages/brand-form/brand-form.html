@@ -1,0 +1,8 @@
+<h1>{{ brandId ? "Edytuj markę" : "Dodaj markę" }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+  <label>Nazwa:
+    <input formControlName="name">
+  </label>
+  <button type="submit">Zapisz</button>
+</form>

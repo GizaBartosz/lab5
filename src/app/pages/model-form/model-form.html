@@ -1,0 +1,13 @@
+<h1>{{ modelId ? "Edytuj model" : "Dodaj model" }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+  <label>Nazwa:
+    <input formControlName="name">
+  </label>
+
+  <label>Rok:
+    <input type="number" formControlName="year">
+  </label>
+
+  <button type="submit">Zapisz</button>
+</form>
